@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, Routes, Route } from "react-router-dom";
 import GoalPage from "./assets/GoalPage";
+import './App.css'
 
 export interface SubGoal {
   id: number;
@@ -63,17 +64,25 @@ function Home() {
         <button type="submit">Add Goal</button>
       </form>
 
-      {goals.length === 0 ? (
-        <p>No goals yet</p>
-      ) : (
-        goals.map((goal) => (
-          <div key={goal.id} style={{ marginBottom: "0.5rem" }} className="goal">
-            <Link to={`/goal/${goal.id}`}>
-              <strong>{goal.goal}</strong>
-            </Link>
-          </div>
-        ))
-      )}
+      <div className="goals">
+
+        {goals.length === 0 ? (
+          <p>No goals yet</p>
+        ) : (
+          goals.map((goal) => (
+            <div key={goal.id}>
+              <Link to={`/goal/${goal.id}`} className="goal">
+                <div className="goal-left">
+                  <strong>{goal.goal}</strong>
+                </div>
+                <div className="goal-right">
+                  <strong>Time: </strong>
+                </div>
+              </Link>
+            </div>
+          ))
+        )}
+      </div>
     </div>
   );
 }
