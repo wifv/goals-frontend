@@ -1,0 +1,82 @@
+import { useEffect, useState } from 'react'
+import './App.css'
+
+export interface SubGoal {
+  id: number;
+  goal: string;
+}
+
+export interface Goal {
+  id: number;
+  goal: string;
+  subGoals: SubGoal[];
+}
+
+function App() {
+  const [goals, setGoals] = useState<Goal[]>([]);
+  const [mainGoal, setMainGoal] = useState("");
+
+  useEffect(() => {
+    fetch('http://localhost:3000/getGoals', {
+      method: "GET"
+    })
+    .then(response => response.json())
+    .then((data:any) => {
+      setGoals(data);
+    })
+  }, [])
+
+  
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (mainGoal.trim() === "") return alert("Goal cannot be empty");
+
+    const payload = { goal: mainGoal };
+
+    try {
+      const res = await fetch("http://localhost:3000/addGoal", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) throw new Error("Failed to add goal");
+      const data = await res.json();
+
+      setGoals([...goals, data.goal]);
+      setMainGoal("");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return (
+    <div style={{ padding: "1rem", fontFamily: "sans-serif" }}>
+      <h1>My Goals</h1>
+
+      <form onSubmit={handleSubmit} style={{ marginBottom: "1rem" }}>
+        <input
+          type="text"
+          placeholder="Enter main goal"
+          value={mainGoal}
+          onChange={(e) => setMainGoal(e.target.value)}
+          style={{ marginRight: "0.5rem" }}
+        />
+        <button type="submit">Add Goal</button>
+      </form>
+
+      {goals.length === 0 ? (
+        <p>No goals yet</p>
+      ) : (
+        goals.map((goal) => (
+          <div key={goal.id} style={{ marginBottom: "0.5rem" }}>
+            <strong>{goal.goal}</strong>
+          </div>
+        ))
+      )}
+    </div>
+  )
+}
+
+export default App
