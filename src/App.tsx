@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react'
-import './App.css'
+import { useEffect, useState } from "react";
+import { Link, Routes, Route } from "react-router-dom";
+import GoalPage from "./assets/GoalPage";
 
 export interface SubGoal {
   id: number;
@@ -12,24 +13,20 @@ export interface Goal {
   subGoals: SubGoal[];
 }
 
-function App() {
+function Home() {
   const [goals, setGoals] = useState<Goal[]>([]);
   const [mainGoal, setMainGoal] = useState("");
 
   useEffect(() => {
-    fetch('http://localhost:3000/getGoals', {
-      method: "GET"
-    })
-    .then(response => response.json())
-    .then((data:any) => {
-      setGoals(data);
-    })
-  }, [])
+    fetch("http://localhost:3000/getGoals")
+      .then((response) => response.json())
+      .then((data: any) => {
+        setGoals(data);
+      });
+  }, []);
 
-  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     if (mainGoal.trim() === "") return alert("Goal cannot be empty");
 
     const payload = { goal: mainGoal };
@@ -70,13 +67,24 @@ function App() {
         <p>No goals yet</p>
       ) : (
         goals.map((goal) => (
-          <div key={goal.id} style={{ marginBottom: "0.5rem" }}>
-            <strong>{goal.goal}</strong>
+          <div key={goal.id} style={{ marginBottom: "0.5rem" }} className="goal">
+            <Link to={`/goal/${goal.id}`}>
+              <strong>{goal.goal}</strong>
+            </Link>
           </div>
         ))
       )}
     </div>
-  )
+  );
 }
 
-export default App
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/goal/:id" element={<GoalPage />} />
+    </Routes>
+  );
+}
+
+export default App;
