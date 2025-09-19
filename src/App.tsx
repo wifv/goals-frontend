@@ -76,7 +76,7 @@ function Home() {
                   <strong>{goal.goal}</strong>
                 </div>
                 <div className="goal-right">
-                  <strong>Time: </strong>
+                  <strong>id: {goal.id}</strong>
                 </div>
               </Link>
             </div>
