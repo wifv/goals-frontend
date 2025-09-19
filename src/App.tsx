@@ -50,16 +50,16 @@ function Home() {
   };
 
   return (
-    <div style={{ padding: "1rem", fontFamily: "sans-serif" }}>
-      <h1>My Goals</h1>
+    <div>
+      <header>My Goals</header>
+      <br />
 
-      <form onSubmit={handleSubmit} style={{ marginBottom: "1rem" }}>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Enter main goal"
           value={mainGoal}
           onChange={(e) => setMainGoal(e.target.value)}
-          style={{ marginRight: "0.5rem" }}
         />
         <button type="submit">Add Goal</button>
       </form>

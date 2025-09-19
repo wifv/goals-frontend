@@ -1,18 +1,27 @@
-// GoalPage.tsx
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import type { Goal } from "../App";
+import './GoalPage.css'
 
 function GoalPage() {
   const { id } = useParams<{ id: string }>();
   const [goal, setGoal] = useState<Goal | null>(null);
   const [subGoal, setSubGoal] = useState("");
 
+  // ✅ Extract fetch logic into a function so we can reuse it
+  const fetchGoal = async () => {
+    try {
+      const res = await fetch(`http://localhost:3000/getGoal/${id}`);
+      if (!res.ok) throw new Error("Failed to fetch goal");
+      const data = await res.json();
+      setGoal(data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   useEffect(() => {
-    fetch(`http://localhost:3000/getGoal/${id}`)
-      .then((res) => res.json())
-      .then((data) => setGoal(data))
-      .catch((err) => console.error(err));
+    fetchGoal();
   }, [id]);
 
   if (!goal) return <p>Loading...</p>;
@@ -31,18 +40,19 @@ function GoalPage() {
       });
 
       if (!res.ok) throw new Error("Failed to add subGoal");
-      // const data = await res.json();
 
       setSubGoal("");
+      await fetchGoal(); // ✅ Re-fetch goal to get updated subGoals
     } catch (error) {
       console.error(error);
     }
   };
 
-
   return (
     <div>
-      <form onSubmit={handleSubmit} style={{ marginBottom: "1rem" }}>
+      <header>Goal number {id}</header>
+      <br />
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Enter sub goal"
@@ -55,9 +65,9 @@ function GoalPage() {
 
       <h2>{goal.goal}</h2>
       {goal.subGoals.length > 0 ? (
-        <ul>
+        <ul className="sub-goals">
           {goal.subGoals.map((sg) => (
-            <li key={sg.id}>{sg.goal}</li>
+            <li key={sg.id} className="sub-goal">{sg.goal}</li>
           ))}
         </ul>
       ) : (
