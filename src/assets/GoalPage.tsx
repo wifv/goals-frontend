@@ -28,7 +28,7 @@ function GoalPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (subGoal.trim() === "") return alert("Goal cannot be empty");
+    // if (subGoal.trim() === "") return alert("Goal cannot be empty");
 
     const payload = { goal: subGoal };
 
@@ -58,12 +58,12 @@ function GoalPage() {
           placeholder="Enter sub goal"
           value={subGoal}
           onChange={(e) => setSubGoal(e.target.value)}
-          style={{ marginRight: "0.5rem" }}
           className="input"
         />
         <button type="submit" className="submit-btn">Add Goal</button>
       </form>
 
+      <br /><br />
       <h2>{goal.goal}</h2>
       {goal.subGoals.length > 0 ? (
         <ul className="sub-goals">

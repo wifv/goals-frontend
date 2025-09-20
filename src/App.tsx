@@ -28,7 +28,6 @@ function Home() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (mainGoal.trim() === "") return alert("Goal cannot be empty");
 
     const payload = { goal: mainGoal };
 
@@ -90,10 +89,12 @@ function Home() {
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/goal/:id" element={<GoalPage />} />
-    </Routes>
+    <main className="main-container">
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/goal/:id" element={<GoalPage />} />
+      </Routes>
+    </main>
   );
 }
 

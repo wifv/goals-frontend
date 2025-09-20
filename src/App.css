@@ -1,3 +1,9 @@
+.main-container {
+  max-width: 1200px;
+  width: 100%;
+  margin: auto;
+}
+
 .goals {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
@@ -34,7 +40,6 @@
   color: rgb(19, 19, 19);
 }
 
-
 .form {
   display: flex;
   flex-direction: column;
@@ -61,13 +66,25 @@
   position: relative;
   z-index: 2;
   background-color: rgb(37, 37, 37);
+  text-align: center;
+
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
 }
 
-input::placeholder {
+/* input {
+  background-color: transparent;
+  text-align: center;
+} */
+
+.input::placeholder {
   color: rgb(187, 176, 176);
 }
 
 header {
   font-size: 30px;
   font-weight: bold;
+  text-align: center;
+  margin: 30px;
 }
