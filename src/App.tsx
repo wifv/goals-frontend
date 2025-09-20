@@ -54,14 +54,15 @@ function Home() {
       <header>My Goals</header>
       <br />
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="form">
         <input
           type="text"
           placeholder="Enter main goal"
           value={mainGoal}
           onChange={(e) => setMainGoal(e.target.value)}
+          className="input"
         />
-        <button type="submit">Add Goal</button>
+        <button type="submit" className="submit-btn">Add Goal</button>
       </form>
 
       <div className="goals">

@@ -52,15 +52,16 @@ function GoalPage() {
     <div>
       <header>Goal number {id}</header>
       <br />
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="form">
         <input
           type="text"
           placeholder="Enter sub goal"
           value={subGoal}
           onChange={(e) => setSubGoal(e.target.value)}
           style={{ marginRight: "0.5rem" }}
+          className="input"
         />
-        <button type="submit">Add Goal</button>
+        <button type="submit" className="submit-btn">Add Goal</button>
       </form>
 
       <h2>{goal.goal}</h2>
@@ -71,7 +72,6 @@ function GoalPage() {
               <div>{sg.goal}</div>
               <div className="sub-goal-interactions">
                 <img src="/check.svg" alt="bambaleylo" className="sub-goal-interaction" />
-                <img src="/delete.svg" alt="bambaleylo" className="sub-goal-interaction" />
                 <img src="/delete.svg" alt="bambaleylo" className="sub-goal-interaction" />
               </div>
             </li>
