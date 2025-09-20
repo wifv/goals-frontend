@@ -6,11 +6,13 @@ import './App.css'
 export interface SubGoal {
   id: number;
   goal: string;
+  done: boolean;
 }
 
 export interface Goal {
   id: number;
   goal: string;
+  done: boolean;
   subGoals: SubGoal[];
 }
 

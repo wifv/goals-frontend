@@ -8,7 +8,6 @@ function GoalPage() {
   const [goal, setGoal] = useState<Goal | null>(null);
   const [subGoal, setSubGoal] = useState("");
 
-  // ✅ Extract fetch logic into a function so we can reuse it
   const fetchGoal = async () => {
     try {
       const res = await fetch(`http://localhost:3000/getGoal/${id}`);
@@ -42,7 +41,24 @@ function GoalPage() {
       if (!res.ok) throw new Error("Failed to add subGoal");
 
       setSubGoal("");
-      await fetchGoal(); // ✅ Re-fetch goal to get updated subGoals
+      await fetchGoal();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleToggle = async (subGoalId: number) => {
+    try {
+      const res = await fetch(
+        `http://localhost:3000/toggleSubGoal/${id}/${subGoalId}`,
+        {
+          method: "PUT",
+        }
+      );
+
+      if (!res.ok) throw new Error("Failed to toggle subGoal");
+
+      await fetchGoal();
     } catch (error) {
       console.error(error);
     }
@@ -68,10 +84,12 @@ function GoalPage() {
       {goal.subGoals.length > 0 ? (
         <ul className="sub-goals">
           {goal.subGoals.map((sg) => (
-            <li key={sg.id} className="sub-goal">
+            <li key={sg.id} className={sg.done ? "sub-goal done" : "sub-goal"}>
               <div>{sg.goal}</div>
               <div className="sub-goal-interactions">
-                <img src="/check.svg" alt="bambaleylo" className="sub-goal-interaction" />
+                <img src="/check.svg" alt="bambaleylo" className="sub-goal-interaction"
+                onClick={() => handleToggle(sg.id)}
+                />
                 <img src="/delete.svg" alt="bambaleylo" className="sub-goal-interaction" />
               </div>
             </li>

@@ -67,16 +67,7 @@
   z-index: 2;
   background-color: rgb(37, 37, 37);
   text-align: center;
-
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
 }
-
-/* input {
-  background-color: transparent;
-  text-align: center;
-} */
 
 .input::placeholder {
   color: rgb(187, 176, 176);
@@ -87,4 +78,13 @@ header {
   font-weight: bold;
   text-align: center;
   margin: 30px;
+}
+
+
+.done {
+  background-color: rgb(17, 41, 18);
+}
+
+.done:hover {
+  background-color: rgb(61, 13, 13);
 }
