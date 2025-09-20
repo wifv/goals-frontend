@@ -67,7 +67,14 @@ function GoalPage() {
       {goal.subGoals.length > 0 ? (
         <ul className="sub-goals">
           {goal.subGoals.map((sg) => (
-            <li key={sg.id} className="sub-goal">{sg.goal}</li>
+            <li key={sg.id} className="sub-goal">
+              <div>{sg.goal}</div>
+              <div className="sub-goal-interactions">
+                <div className="sub-goal-interaction">gay</div>
+                <div className="sub-goal-interaction">gay</div>
+                <div className="sub-goal-interaction">gay</div>
+              </div>
+            </li>
           ))}
         </ul>
       ) : (

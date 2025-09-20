@@ -73,10 +73,10 @@ function Home() {
             <div key={goal.id}>
               <Link to={`/goal/${goal.id}`} className="goal">
                 <div className="goal-left">
-                  <strong>{goal.goal}</strong>
+                  <h2>{goal.goal}</h2>
                 </div>
                 <div className="goal-right">
-                  <strong>id: {goal.id}</strong>
+                  <div>id: {goal.id}</div>
                 </div>
               </Link>
             </div>

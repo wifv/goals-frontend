@@ -5,20 +5,18 @@
 }
 
 .sub-goal {
-  padding: 20px;
-  background-color: rgb(82, 82, 82);
-  transition: 0.2s ease-in-out background-color;
-  cursor: pointer;
-  height: 200px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
+  min-height: 100px;
+  gap: 20px;
   justify-content: space-between;
-  font-size: large;
 }
 
 .sub-goal:hover {
   background-color: rgb(209, 195, 195);
   color: rgb(19, 19, 19);
   box-shadow: rgba(233, 233, 233, 0.25) 0px 22px 22px, rgba(233, 233, 233, 0.12) 0px -12px 30px, rgba(233, 233, 233, 0.12) 0px 4px 6px, rgba(233, 233, 233, 0.17) 0px 12px 13px, rgba(233, 233, 233, 0.09) 0px -3px 5px;
+}
+
+.sub-goal-interactions {
+  display: flex;
+  gap: 10px;
 }
