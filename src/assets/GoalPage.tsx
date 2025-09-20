@@ -70,9 +70,9 @@ function GoalPage() {
             <li key={sg.id} className="sub-goal">
               <div>{sg.goal}</div>
               <div className="sub-goal-interactions">
-                <div className="sub-goal-interaction">gay</div>
-                <div className="sub-goal-interaction">gay</div>
-                <div className="sub-goal-interaction">gay</div>
+                <img src="/check.svg" alt="bambaleylo" className="sub-goal-interaction" />
+                <img src="/delete.svg" alt="bambaleylo" className="sub-goal-interaction" />
+                <img src="/delete.svg" alt="bambaleylo" className="sub-goal-interaction" />
               </div>
             </li>
           ))}
